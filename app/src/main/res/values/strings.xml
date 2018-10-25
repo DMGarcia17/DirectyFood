@@ -11,6 +11,13 @@
     <string name="hello_blank_fragment">Hello red fragment</string>
     <string name="iniciar_sesi_n">Iniciar Sesión</string>
     <string name="contrase_a">Contraseña</string>
-    <string name="iniciar_sesi_n">Iniciar Sesión</string>
     <string name="nombre_de_usuario">Nombre de usuario</string>
+    <string name="button">Button</string>
+    <string name="he_leido_y_acepto_los_terminos_y_condiciones_n_mantenga_presionado_para_revisarlos">He leido y acepto los Terminos y condiciones. (Mantenga presionado para revisarlos)</string>
+    <string name="direcci_n">Dirección</string>
+    <string name="descripci_n_de_la_empresa">Descripción de la empresa</string>
+    <string name="direcci_n_del_local">Dirección del local</string>
+    <string name="correo_email_com">correo@email.com</string>
+    <string name="nombre_de_la_empresa">Nombre de la empresa</string>
+    <string name="correo_electronico">Correo Electronico</string>
 </resources>
