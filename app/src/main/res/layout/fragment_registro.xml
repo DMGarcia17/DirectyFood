@@ -36,10 +36,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/correo_electronico"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtUser" />
+                app:layout_constraintTop_toBottomOf="@+id/txtPass" />
 
             <EditText
                 android:id="@+id/txtUser"
@@ -76,7 +76,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
 
             <EditText
-                android:id="@+id/editText3"
+                android:id="@+id/txtCompany"
                 android:layout_width="324dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
@@ -95,10 +95,10 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/direcci_n_del_local"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText3" />
+                app:layout_constraintTop_toBottomOf="@+id/txtCompany" />
 
             <EditText
-                android:id="@+id/editText4"
+                android:id="@+id/txtLocation"
                 android:layout_width="324dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
@@ -117,12 +117,12 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/descripci_n_de_la_empresa"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText4" />
+                app:layout_constraintTop_toBottomOf="@+id/txtLocation" />
 
             <EditText
-                android:id="@+id/editText6"
+                android:id="@+id/txtDescription"
                 android:layout_width="324dp"
-                android:layout_height="120dp"
+                android:layout_height="163dp"
                 android:layout_marginStart="14dp"
                 android:layout_marginTop="12dp"
                 android:ems="10"
@@ -131,23 +131,45 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvDes" />
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/cbTerms"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
                 android:layout_marginTop="12dp"
                 android:text="@string/he_leido_y_acepto_los_terminos_y_condiciones_n_mantenga_presionado_para_revisarlos"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/editText6" />
+                app:layout_constraintTop_toBottomOf="@+id/txtDescription" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/btnRegister"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:text="@string/button"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/checkBox" />
+                app:layout_constraintTop_toBottomOf="@+id/cbTerms" />
+
+            <TextView
+                android:id="@+id/textView5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="20dp"
+                android:layout_marginTop="8dp"
+                android:text="@string/contrase_a"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtUser" />
+
+            <EditText
+                android:id="@+id/txtPass"
+                android:layout_width="324dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="12dp"
+                android:ems="10"
+                android:hint="@string/contrase_a"
+                android:inputType="textPassword"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView5" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

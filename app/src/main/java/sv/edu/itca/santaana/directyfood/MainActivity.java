@@ -56,11 +56,6 @@ public class MainActivity extends AppCompatActivity
     }
     public void nadita(View v){
         OtroFragment fr = new OtroFragment();
-//        fr.setArguments(bn);
-//        getActivity().getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.content_main, fr)
-//                .addToBackStack(null)
-//                .commit();
         FragmentTransaction frag = getFragmentManager().beginTransaction();
         frag.replace(R.id.content_main, fr);
         frag.addToBackStack(null);
