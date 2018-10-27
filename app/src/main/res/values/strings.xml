@@ -10,7 +10,6 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello red fragment</string>
     <string name="iniciar_sesi_n">Iniciar Sesión</string>
-    <string name="contrase_a">Contraseña</string>
     <string name="nombre_de_usuario">Nombre de usuario</string>
     <string name="button">Button</string>
     <string name="he_leido_y_acepto_los_terminos_y_condiciones_n_mantenga_presionado_para_revisarlos">He leido y acepto los Terminos y condiciones. (Mantenga presionado para revisarlos)</string>

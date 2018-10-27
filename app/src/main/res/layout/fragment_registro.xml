@@ -58,7 +58,7 @@
                 android:layout_width="324dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="@string/correo_email_com"
                 android:inputType="textEmailAddress"
@@ -70,7 +70,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:text="@string/nombre_de_la_empresa"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/txtEmail" />
@@ -80,7 +80,7 @@
                 android:layout_width="324dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="14dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="8dp"
                 android:ems="10"
                 android:hint="@string/nombre_de_la_empresa"
                 android:inputType="textPersonName"
@@ -95,7 +95,7 @@
                 android:layout_marginTop="12dp"
                 android:text="@string/direcci_n_del_local"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/txtCompany" />
+                app:layout_constraintTop_toBottomOf="@+id/button" />
 
             <EditText
                 android:id="@+id/txtLocation"
@@ -170,6 +170,16 @@
                 android:inputType="textPassword"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView5" />
+
+            <Button
+                android:id="@+id/btnLogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="14dp"
+                android:layout_marginTop="12dp"
+                android:text="Elegir Logo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtCompany" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
