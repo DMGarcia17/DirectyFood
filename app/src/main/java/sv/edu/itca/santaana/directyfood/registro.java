@@ -1,29 +1,31 @@
 package sv.edu.itca.santaana.directyfood;
 
-import android.content.Context;
+import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
+import android.app.Fragment;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.TextView;
-
+import android.widget.Toast;
 import com.android.volley.AuthFailureError;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-
-import org.json.JSONArray;
-
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.Map;
 
 public class registro extends Fragment{
@@ -40,8 +42,11 @@ public class registro extends Fragment{
     private CheckBox cbTerms;
     private Button btnRegister;
     private OnFragmentInteractionListener mListener;
-    private String path;
-    StringRequest str;
+    private ProgressDialog progress;
+    private RequestQueue req;
+    private VolleyS v;
+    private StringRequest str;
+    private Bitmap bit;
 
     public registro() {
         // Required empty public constructor
@@ -76,8 +81,39 @@ public class registro extends Fragment{
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode == 10){
             Uri uri = data.getData();
+            try {
+                bit = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
 
         }
+    }
+
+    public void addToQueue(Request request) {
+        if (request != null) {
+            request.setTag(this);
+            if (req == null)
+                req = v.getRequestQueue();
+            request.setRetryPolicy(new DefaultRetryPolicy(
+                    60000, 3, DefaultRetryPolicy.DEFAULT_BACKOFF_MULT
+            ));
+            onPreStartConnection();
+            req.add(request);
+        }
+    }
+
+    public void onPreStartConnection() {
+        getActivity().setProgressBarIndeterminateVisibility(true);
+    }
+
+    public void onConnectionFinished() {
+        getActivity().setProgressBarIndeterminateVisibility(false);
+    }
+
+    public void onConnectionFailed(String error) {
+        getActivity().setProgressBarIndeterminateVisibility(false);
+        Toast.makeText(getActivity(), error, Toast.LENGTH_LONG).show();
     }
 
     @Override
@@ -93,12 +129,14 @@ public class registro extends Fragment{
         btnRegister = (Button) vista.findViewById(R.id.btnRegister);
         cbTerms = (CheckBox) vista.findViewById(R.id.cbTerms);
         Button btnLogo = (Button) vista.findViewById(R.id.btnLogo);
+        progress = new ProgressDialog(getContext());
+        v = VolleyS.getInstance(getActivity().getApplicationContext());
+        req = v.getRequestQueue();
         btnLogo.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent log = new Intent(Intent.ACTION_PICK,
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI);
-                log.setType("images/png");
+                Intent log = new Intent(Intent.ACTION_GET_CONTENT);
+                log.setType("image/png");
                 startActivityForResult(Intent.createChooser(log, "Seleccione"), 10);
             }
         });
@@ -118,7 +156,6 @@ public class registro extends Fragment{
             public void onClick(View v) {
                 if(cbTerms.isChecked()){
                     cargarwebservice();
-
                 }
             }
         });
@@ -128,27 +165,62 @@ public class registro extends Fragment{
     }
 
     private void cargarwebservice() {
-        String url = "https://foodapp-android.azurewebsites.net/index.php";
-//        String key = "AJZfpodVtaCFQO5TKpV8PE7qLlKiAbNglPeNhoiudyD3LsEE2RlFq6pe";
+//        String url = "https://farmatienda.000webhostapp.com/index.php";
+//        String url = "http://192.168.43.223/flocal/index.php";
 //        String params = "data="+txtUser.getText().toString()
 //                +"||"+txtPass.getText().toString()+"||"+txtCompany.getText().toString()+
 //                "||"+txtLocation.getText().toString()+"||"+path+"||"+txtDescription.getText().toString();
-        str = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+        str = new StringRequest(Request.Method.POST, getResources().getString(R.string.url), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-
+                if(response.equalsIgnoreCase("true")){
+                    Toast.makeText(getContext(), "Se ha registrado exitosamente \nAhora usted puede iniciar sesión",
+                            Toast.LENGTH_SHORT).show();
+                    onConnectionFinished();
+                }else{
+                    Toast.makeText(getContext(), "No Se ha registrado exitosamente",
+                            Toast.LENGTH_SHORT).show();
+                }
             }
         }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                progress.hide();
+                onConnectionFailed(error.toString());
+                txtDescription.setText(error.getMessage());
             }
         }){
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                return super.getParams();
+                String user = txtUser.getText().toString();
+                String pass = txtPass.getText().toString();
+                String key = "AJZfpodVtaCFQO5TKpV8PE7qLlKiAbNglPeNhoiudyD3LsEE2RlFq6pe";
+                String company = txtCompany.getText().toString();
+                String locat = txtLocation.getText().toString();
+                String img = cItoS(bit);
+                String descrip = txtDescription.getText().toString();
+
+                Map<String, String> param = new HashMap<>();
+                param.put("user", user);
+                param.put("pass", pass);
+                param.put("company", company);
+                param.put("locat", locat);
+                param.put("img", img);
+                param.put("descrip", descrip);
+                param.put("key", key);
+                param.put("act", "2");
+
+                return param;
             }
         };
+        addToQueue(str);
+    }
+
+    private String cItoS(Bitmap bitm) {
+        ByteArrayOutputStream bte = new ByteArrayOutputStream();
+        bitm.compress(Bitmap.CompressFormat.PNG, 100, bte);
+        byte[] array = bte.toByteArray();
+        return Base64.encodeToString(array, Base64.DEFAULT);
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -157,17 +229,17 @@ public class registro extends Fragment{
             mListener.onFragmentInteraction(uri);
         }
     }
-
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
-        } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
-        }
-    }
+//
+//    @Override
+//    public void onAttach(Context context) {
+//        super.onAttach(context);
+//        if (context instanceof OnFragmentInteractionListener) {
+//            mListener = (OnFragmentInteractionListener) context;
+//        } else {
+//            throw new RuntimeException(context.toString()
+//                    + " must implement OnFragmentInteractionListener");
+//        }
+//    }
 
     @Override
     public void onDetach() {

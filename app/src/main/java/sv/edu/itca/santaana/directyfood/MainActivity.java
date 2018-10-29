@@ -103,9 +103,10 @@ public class MainActivity extends AppCompatActivity
         boolean fragmentSeleccionado= false;
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
+            miFragment=new registro();
+            fragmentSeleccionado=true;
         } else if (id == R.id.nav_gallery) {
-            miFragment=new RedFragment();
+            miFragment=new login();
             fragmentSeleccionado=true;
         } else if (id == R.id.nav_slideshow) {
             miFragment =new OtroFragment();
