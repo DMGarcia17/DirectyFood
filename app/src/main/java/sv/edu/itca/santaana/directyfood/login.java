@@ -10,7 +10,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
 import com.android.volley.AuthFailureError;
 import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
@@ -20,11 +19,9 @@ import com.android.volley.Response.Listener;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.StringRequest;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -111,14 +108,6 @@ public class login extends Fragment implements Listener<JSONObject>, Response.Er
     }
 
     public void comprobarLogin() {
-//        String key = "AJZfpodVtaCFQO5TKpV8PE7qLlKiAbNglPeNhoiudyD3LsEE2RlFq6pe";
-//        String user = txtLUser.getText().toString();
-//        String passwd = txtLPass.getText().toString();
-//        String url = getResources().getString(R.string.url);
-//        url += "user" + user + "&passwd=" + passwd + "&key=" + key + "&act=3";
-//        url = url.replace(" ", "%20");
-
-
         str = new StringRequest(Request.Method.POST, getResources().getString(R.string.url), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

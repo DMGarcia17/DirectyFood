@@ -28,7 +28,7 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-public class registro extends Fragment{
+public class registro extends Fragment {
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
     private String mParam1;
@@ -79,7 +79,7 @@ public class registro extends Fragment{
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if(requestCode == 10){
+        if (requestCode == 10) {
             Uri uri = data.getData();
             try {
                 bit = MediaStore.Images.Media.getBitmap(getContext().getContentResolver(), uri);
@@ -142,7 +142,6 @@ public class registro extends Fragment{
         });
 
 
-
         cbTerms.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
@@ -154,7 +153,7 @@ public class registro extends Fragment{
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(cbTerms.isChecked()){
+                if (cbTerms.isChecked()) {
                     cargarwebservice();
                 }
             }
@@ -165,19 +164,14 @@ public class registro extends Fragment{
     }
 
     private void cargarwebservice() {
-//        String url = "https://farmatienda.000webhostapp.com/index.php";
-//        String url = "http://192.168.43.223/flocal/index.php";
-//        String params = "data="+txtUser.getText().toString()
-//                +"||"+txtPass.getText().toString()+"||"+txtCompany.getText().toString()+
-//                "||"+txtLocation.getText().toString()+"||"+path+"||"+txtDescription.getText().toString();
         str = new StringRequest(Request.Method.POST, getResources().getString(R.string.url), new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                if(response.equalsIgnoreCase("true")){
+                if (response.equalsIgnoreCase("true")) {
                     Toast.makeText(getContext(), "Se ha registrado exitosamente \nAhora usted puede iniciar sesión",
                             Toast.LENGTH_SHORT).show();
                     onConnectionFinished();
-                }else{
+                } else {
                     Toast.makeText(getContext(), "No Se ha registrado exitosamente",
                             Toast.LENGTH_SHORT).show();
                 }
@@ -189,7 +183,7 @@ public class registro extends Fragment{
                 onConnectionFailed(error.toString());
                 txtDescription.setText(error.getMessage());
             }
-        }){
+        }) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 String user = txtUser.getText().toString();
@@ -223,23 +217,11 @@ public class registro extends Fragment{
         return Base64.encodeToString(array, Base64.DEFAULT);
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
         }
     }
-//
-//    @Override
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        if (context instanceof OnFragmentInteractionListener) {
-//            mListener = (OnFragmentInteractionListener) context;
-//        } else {
-//            throw new RuntimeException(context.toString()
-//                    + " must implement OnFragmentInteractionListener");
-//        }
-//    }
 
     @Override
     public void onDetach() {
