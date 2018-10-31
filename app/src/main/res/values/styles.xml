@@ -8,6 +8,13 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="CampoTexto1" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">#FF0000</item>
+        <item name="colorControlActivated">#39008e</item>
+        <item name="android:textColorHighlight">#E1BEE7</item>
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>

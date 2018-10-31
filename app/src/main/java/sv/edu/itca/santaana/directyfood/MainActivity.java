@@ -18,7 +18,7 @@ import android.view.MenuItem;
 
 public class MainActivity extends AppCompatActivity
 
-        implements NavigationView.OnNavigationItemSelectedListener, RedFragment.OnFragmentInteractionListener, OtroFragment.OnFragmentInteractionListener{
+        implements NavigationView.OnNavigationItemSelectedListener {
 
     //public Button boton;
     @Override
@@ -37,14 +37,6 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
-
-        //OtroFragment fragmento1 = new OtroFragment();
-        //getSupportFragmentManager().beginTransaction().add(R.id.content_main,fragmento1);
-        //boton=(Button)findViewById(R.id.btnNadita);
-
-        //boton.setOnClickListener(this);
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -53,14 +45,21 @@ public class MainActivity extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
-    public void nadita(View v){
-        OtroFragment fr = new OtroFragment();
+
+        inicio in = new inicio();
         FragmentTransaction frag = getFragmentManager().beginTransaction();
-        frag.replace(R.id.content_main, fr);
+        frag.replace(R.id.content_main, in);
         frag.addToBackStack(null);
         frag.commit();
     }
+
+    //    public void nadita(View v){
+//        OtroFragment fr = new OtroFragment();
+//        FragmentTransaction frag = getFragmentManager().beginTransaction();
+//        frag.replace(R.id.content_main, fr);
+//        frag.addToBackStack(null);
+//        frag.commit();
+//    }
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -99,18 +98,16 @@ public class MainActivity extends AppCompatActivity
         // Handle navigation view item clicks here.
         int id = item.getItemId();
 
-        Fragment miFragment=null;
-        boolean fragmentSeleccionado= false;
+        Fragment miFragment = null;
+        boolean fragmentSeleccionado = false;
 
         if (id == R.id.nav_camera) {
-            miFragment=new registro();
-            fragmentSeleccionado=true;
+            miFragment = new registro();
+            fragmentSeleccionado = true;
         } else if (id == R.id.nav_gallery) {
-            miFragment=new login();
-            fragmentSeleccionado=true;
+            miFragment = new login();
+            fragmentSeleccionado = true;
         } else if (id == R.id.nav_slideshow) {
-            miFragment =new OtroFragment();
-            fragmentSeleccionado=true;
 
         } else if (id == R.id.nav_manage) {
 
@@ -121,8 +118,8 @@ public class MainActivity extends AppCompatActivity
         }
 
 
-        if (fragmentSeleccionado==true){
-            getFragmentManager().beginTransaction().replace(R.id.content_main,miFragment).commit();
+        if (fragmentSeleccionado == true) {
+            getFragmentManager().beginTransaction().replace(R.id.content_main, miFragment).commit();
         }
 
 
@@ -130,26 +127,4 @@ public class MainActivity extends AppCompatActivity
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
-
-    @Override
-    public void onFragmentInteraction(Uri uri) {
-
-    }
-
-
-    //@Override
-    //public void onClick(View v) {
-        //switch (v.getId()){
-            //case R.id.btnNadita:
-                //OtroFragment fragmento1 = new OtroFragment();
-           //FragmentTransaction transaction=getSupportFragmentManager().beginTransaction();
-             //transaction.replace(R.id.content_main, fragmento1);
-               //transaction.commit();
-                //break;
-
-                //default:
-                    //break;
-
-        //}
-    //}
 }
