@@ -1,7 +1,19 @@
 package sv.edu.itca.santaana.directyfood;
 
 public class Products {
-    private String nombre, precio, desc;
+    private String nombre;
+    private String precio;
+    private String desc;
+    private String id;
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getId() {
+
+        return id;
+    }
 
     public String getNombre() {
         return nombre;

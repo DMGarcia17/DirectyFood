@@ -1,5 +1,6 @@
 package sv.edu.itca.santaana.directyfood;
 
+import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,6 +8,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -65,10 +67,17 @@ public class inicio extends Fragment implements Response.ErrorListener, Response
         ltbProducts = v.findViewById(R.id.ltbProducts);
         req = Volley.newRequestQueue(getContext());
         cargarWebService();
-        ltbProducts.setOnClickListener(new View.OnClickListener() {
+        ltbProducts.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
-
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                vista_producto in = new vista_producto();
+                Bundle args = new Bundle();
+                args.putString("pos", list.get(i).getId());
+                in.setArguments(args);
+                FragmentTransaction frag = getFragmentManager().beginTransaction();
+                frag.replace(R.id.content_main, in);
+                frag.addToBackStack(null);
+                frag.commit();
             }
         });
         return v;
@@ -100,6 +109,7 @@ public class inicio extends Fragment implements Response.ErrorListener, Response
                 p.setNombre(obj.optString("name"));
                 p.setDesc(obj.optString("description"));
                 p.setPrecio("$"+obj.optString("price"));
+                p.setId(obj.optString("id_pro"));
                 list.add(p);
             }
             ProductsAdap pro = new ProductsAdap(getContext(), list);

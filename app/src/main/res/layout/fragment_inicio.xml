@@ -55,6 +55,7 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="76dp"
             android:background="@drawable/borde_redondo"
+            android:fontFamily="@font/raleway"
             android:text="Buscar"
             app:layout_constraintStart_toEndOf="@+id/txtSearch"
             app:layout_constraintTop_toTopOf="parent" />
