@@ -1,6 +1,7 @@
 package sv.edu.itca.santaana.directyfood;
 
 import android.app.FragmentTransaction;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -53,12 +54,7 @@ public class MainActivity extends AppCompatActivity
 //    }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
-        }
+        finish();
     }
 
     @Override
@@ -93,18 +89,15 @@ public class MainActivity extends AppCompatActivity
         boolean fragmentSeleccionado = false;
 
         if (id == R.id.nav_camera) {
-            miFragment = new registro();
+            miFragment = new inicio();
             fragmentSeleccionado = true;
         } else if (id == R.id.nav_gallery) {
-            miFragment = new login();
+//            miFragment = new info();
             fragmentSeleccionado = true;
         } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
+            Uri uri = Uri.parse("https://directy.000webhostapp.com/");
+            Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+            startActivity(intent);
 
         }
 

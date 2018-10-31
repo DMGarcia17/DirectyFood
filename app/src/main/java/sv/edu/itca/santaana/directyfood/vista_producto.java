@@ -1,9 +1,7 @@
 package sv.edu.itca.santaana.directyfood;
 
 import android.app.FragmentTransaction;
-import android.content.Context;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.view.LayoutInflater;
@@ -70,7 +68,7 @@ public class vista_producto extends Fragment implements Response.ErrorListener, 
         tvPrecio = v.findViewById(R.id.tvPrecio);
         btnInfoC = v.findViewById(R.id.btnInfoC);
         imgFotografia = v.findViewById(R.id.imgFotografia);
-        imgLogo = v.findViewById(R.id.imgLogo);
+        imgLogo = v.findViewById(R.id.imgLog);
         req = Volley.newRequestQueue(getContext());
         carga();
         btnInfoC.setOnClickListener(new View.OnClickListener() {
